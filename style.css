@@ -21,7 +21,7 @@ html {
 	scroll-behavior: smooth;
 }
 html::-webkit-scrollbar {
-	width: 0.8rem;
+	width: 0.3rem;
 }
 html::-webkit-scrollbar-track {
 	background: transparent;
@@ -76,14 +76,26 @@ section{
 	height: 6rem;
 }
 .header .navbar a {
+	position: relative;
 	margin: 0.5rem;
 	font-size: 1.7rem;
 	color: white;
 }
+.header .navbar a::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -0.5rem;
+	background: var(--main-color);
+	width: 0;
+	height: .1rem;
+	transition: .2s linear;
+}
 .header .navbar a:hover {
 	color: var(--main-color);
-	border-bottom: .1rem solid var(--main-color);
-	padding-bottom: 0.5rem;
+}
+.header .navbar a:hover::before {
+	width: 100%;
 }
 .header .icons i {
 	color: white;
@@ -111,7 +123,6 @@ section{
 }
 .header .search-form.active {
 	transform: scale(1);
-
 }
 .header .search-form  input {
 	height: 100%;
@@ -132,7 +143,7 @@ section{
 }
 .header .cart-items-container {
 	position: absolute;
-	top: 100%;
+	top: calc(100% + .1rem);
 	right: -100%;
 	height: calc(100vh - 9.5rem);
 	width: 35rem;
@@ -141,6 +152,14 @@ section{
 }
 .header .cart-items-container.active {
 	right: 0;
+}
+.header .cart-items-container.active .shadow {
+	position: absolute;
+	top: 0;
+	right: 35rem;
+	width: calc(100vw - 35rem);
+	height: calc(100vh - 9.4rem);
+	background: rgba(0,0,0,.5);
 }
 .header .cart-items-container .cart-item {
 	position: relative;
@@ -176,6 +195,7 @@ section{
 	width: 100%;
 	text-align: center;
 }
+/* Начало первой секция */
 .home {
 	min-height: 100vh;
 	display: flex;
@@ -204,8 +224,9 @@ section{
 	padding: 1rem 0;
 	color: #eee;
 	text-shadow: 1px 1px 3px black;
-
 }
+/* Конец первой секции */
+/* Начало второй секции */
 .about .row {
 	display: flex;
 	align-items: center;
@@ -232,6 +253,8 @@ section{
 	padding: 1rem 0;
 	line-height: 1.8;
 }
+/* Конец второй секции */
+/* Начало третьей секции */
 .menu .box-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -266,6 +289,8 @@ section{
 .menu .box-container .box:hover > * {
 	color: var(--black);
 }
+/* Конец третьей секции */
+/* Начало четвертой секции */
 .products .box-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -315,6 +340,8 @@ section{
 	font-weight: lighter;
 	font-size: 1.5rem;
 }
+/* Конец четвертой секции */
+/* Начало пятой секции */
 .review .box-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -351,6 +378,8 @@ section{
 	font-size: 1.5rem;
 	color: var(--main-color);
 }
+/* Конец пятой секции */
+/* Начало шестой секции */
 .contact .row {
 	display: flex;
 	background: var(--black);
@@ -381,11 +410,6 @@ section{
 	background: var(--bg);
 	border: var(--border);
 }
-.contact .row form .inputBox span {
-	color: white;
-	font-size: 2rem;
-	padding-left: 2rem;
-}
 .contact .row form .inputBox  input {
 	width: 100%;
 	padding: 2rem;
@@ -411,6 +435,8 @@ section{
 	font-size: 1.7rem;
 	padding-left: 2rem;
 }
+/* Конец шестой секции */
+/* Начало седьмой секции */
 .blogs .box-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -443,9 +469,8 @@ section{
 .blogs .box-container .box .content .title:hover {
 	color: var(--main-color);
 }
-.blogs .box-container .box .content span {
+.blogs .box-container .box .content div {
 	color: var(--main-color);
-	display: block;
 	padding-top: 1rem;
 	font-size: 2rem;
 }
@@ -455,6 +480,8 @@ section{
 	color: #ccc;
 	padding: 1rem 0;
 }
+/* Конец седьмой секции */
+/* Начало футера */
 .footer {
 	background: var(--black);
 	text-align: center;
@@ -500,6 +527,8 @@ section{
 .footer .rights span {
 	color: var(--main-color);
 }
+/* Конец футера */
+/* Медиазапросы */
 @media (max-width:991px) {
 	html {
 		font-size: 55%;
@@ -516,19 +545,34 @@ section{
 		display: inline-block;
 	}
 	.header .navbar {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
 		position: absolute;
-		top: 100%;
+		top:calc(100% + .1rem);
 		right: -100%;
-		background: white;
+		background: var(--bg);
 		width: 30rem;
 		height: calc(100vh - 9.5rem);
+		transition: .2s linear;
 	}
+	#menu-btn.fa-x {
+        transform: rotate(90deg);
+    }
 	.header .navbar.active {
 		right: 0;
 	}
+	.header .navbar.active .shadow {
+		position: absolute;
+		top: 0;
+		right: 30rem;
+		width: calc(100vw - 30rem);
+		height: calc(100vh - 9.5rem);
+		background: rgba(0,0,0,.5);
+	}
 	.header .navbar a {
-		color: var(--black);
-		display: block;
+		color: white;
+		text-align: center;
 		margin: 1.5rem;
 		padding: 0.5rem;
 		font-size: 2rem;
